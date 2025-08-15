@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 public class EmailSendConsumer {
     @KafkaListener(
             topics = "email.send",
-            groupId = "email-send-group"
+            groupId = "email-send-group",
+            concurrency = "3" //멀티 쓰레드를 활용하여 병렬처리할 Partition의 개수
     )
     @RetryableTopic(
             attempts = "5",
